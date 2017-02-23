@@ -61,8 +61,6 @@
     } else if ([self isKindOfClass:[UIButton class]]) {
         [((UIButton *)self) setImage:image forState:UIControlStateNormal];
     }
-    
-    [self setNeedsDisplay];
 }
 
 #pragma mark - Container Operation

@@ -12,6 +12,7 @@
 		744A9EE21E5D923E001A21A0 /* UIView+XBWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 744A9EE11E5D923E001A21A0 /* UIView+XBWebImage.m */; };
 		745408F31E5E8DA700B5E33C /* UIImageView+XBWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745408F21E5E8DA700B5E33C /* UIImageView+XBWebImage.m */; };
 		745408F61E5E914D00B5E33C /* UIButton+XBWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745408F51E5E914D00B5E33C /* UIButton+XBWebImage.m */; };
+		745408FA1E5ED9C500B5E33C /* CALayer+XBWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 745408F91E5ED9C500B5E33C /* CALayer+XBWebImage.m */; };
 		74817D431E5BE015008A7C67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 74817D421E5BE015008A7C67 /* main.m */; };
 		74817D461E5BE015008A7C67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 74817D451E5BE015008A7C67 /* AppDelegate.m */; };
 		74817D491E5BE015008A7C67 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74817D481E5BE015008A7C67 /* ViewController.m */; };
@@ -34,6 +35,8 @@
 		745408F41E5E914D00B5E33C /* UIButton+XBWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+XBWebImage.h"; sourceTree = "<group>"; };
 		745408F51E5E914D00B5E33C /* UIButton+XBWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+XBWebImage.m"; sourceTree = "<group>"; };
 		745408F71E5E9E3200B5E33C /* XBWebImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XBWebImage.h; sourceTree = "<group>"; };
+		745408F81E5ED9C500B5E33C /* CALayer+XBWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+XBWebImage.h"; sourceTree = "<group>"; };
+		745408F91E5ED9C500B5E33C /* CALayer+XBWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+XBWebImage.m"; sourceTree = "<group>"; };
 		74817D3E1E5BE015008A7C67 /* XBWebImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XBWebImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74817D421E5BE015008A7C67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		74817D441E5BE015008A7C67 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -70,6 +73,8 @@
 				745408F21E5E8DA700B5E33C /* UIImageView+XBWebImage.m */,
 				745408F41E5E914D00B5E33C /* UIButton+XBWebImage.h */,
 				745408F51E5E914D00B5E33C /* UIButton+XBWebImage.m */,
+				745408F81E5ED9C500B5E33C /* CALayer+XBWebImage.h */,
+				745408F91E5ED9C500B5E33C /* CALayer+XBWebImage.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 				745408F31E5E8DA700B5E33C /* UIImageView+XBWebImage.m in Sources */,
 				74817D5B1E5BE1A2008A7C67 /* XBWebImageDownloaderOperation.m in Sources */,
 				74817D461E5BE015008A7C67 /* AppDelegate.m in Sources */,
+				745408FA1E5ED9C500B5E33C /* CALayer+XBWebImage.m in Sources */,
 				744A9EE21E5D923E001A21A0 /* UIView+XBWebImage.m in Sources */,
 				74817D431E5BE015008A7C67 /* main.m in Sources */,
 				744A9EDE1E5D7062001A21A0 /* XBWebImageCache.m in Sources */,

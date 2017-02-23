@@ -13,5 +13,6 @@
 #import "XBWebImageManager.h"
 #import "UIImageView+XBWebImage.h"
 #import "UIButton+XBWebImage.h"
+#import "CALayer+XBWebImage.h"
 
 #endif /* XBWebImage_h */
