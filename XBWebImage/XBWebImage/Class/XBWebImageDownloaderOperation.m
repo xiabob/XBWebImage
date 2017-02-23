@@ -85,8 +85,9 @@ static NSString *const kCompletedCallbackKey = @"kCompletedCallbackKey";
 }
 
 - (void)callProgressBlockWithReceivedSize:(NSUInteger)receivedSize andExpectedSize:(NSInteger)expectedSize {
+    NSArray *blocks = [self progressCallbacks];
     dispatch_main_async_safe(^{
-        for (XBWebImageDownloaderProgressBlock progressBlock in [self progressCallbacks]) {
+        for (XBWebImageDownloaderProgressBlock progressBlock in blocks) {
             progressBlock(receivedSize, expectedSize, self.request.URL);
         }
     })
@@ -100,11 +101,13 @@ static NSString *const kCompletedCallbackKey = @"kCompletedCallbackKey";
                                data:(NSData *)data
                               error:(NSError *)error
                         andFinished:(BOOL)finished {
+    //注意：如果[self completedCallbacks]放在dispatch_main_async_safe里面，就有可能出问题，clear方法会remove这些block，这样就无法保证操作的原子性。因此取block时，可能block已经被删除了，无法发生回调。
+    NSArray *blocks = [self completedCallbacks];
     dispatch_main_async_safe(^{
-        for (XBWebImageDownloaderCompletedBlock completedBlock in [self completedCallbacks]) {
+        for (XBWebImageDownloaderCompletedBlock completedBlock in blocks) {
             completedBlock(image, data, error, finished);
         }
-    })
+    });
 }
 
 #pragma mark -

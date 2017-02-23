@@ -50,7 +50,7 @@ typedef NS_OPTIONS(NSUInteger, XBWebImageDownloaderExecutionOrder) {
                                            progress:(XBWebImageDownloaderProgressBlock)progressBlock
                                           completed:(XBWebImageDownloaderCompletedBlock)completedBlock;
 
-- (void)cancle:(XBWebImageDownloaderToken *)token;
-- (void)cancleAllOperations;
+- (void)cancel:(XBWebImageDownloaderToken *)token;
+- (void)cancelAllOperations;
 
 @end

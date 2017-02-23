@@ -97,10 +97,11 @@
             __weak typeof(self) wself = self;
             __weak typeof (XBWebImageContainerOperation *) woperation = operation;
             operation.token = [self.imageDownloader downloadImageWithUrl:imageUrl options:0 progress:progressBlock completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-                //completed block是main thread
-                XBWebImageContainerOperation *soperation = woperation;
-                XBWebImageManager *sself = wself;
+                __strong typeof(woperation) soperation = woperation;
+                __strong typeof(wself) sself = wself;
                 if (!sself || !soperation) {return ;}
+                
+                //here not main thread
                 if (image && finished) {
                     [sself.imageCache saveImage:image imageData:data toDisk:YES forKey:url];
                 }
@@ -151,7 +152,7 @@
     self.cancel = YES;
     
     if (self.token) {
-        [[XBWebImageDownloader sharedDownloader] cancle:self.token];
+        [[XBWebImageDownloader sharedDownloader] cancel:self.token];
         self.token = nil;
     }
     

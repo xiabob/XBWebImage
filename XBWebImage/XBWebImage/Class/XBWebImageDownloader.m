@@ -47,7 +47,8 @@
         _barrierQueue = dispatch_queue_create("com.xiabob.XBWebImageDownloader.barrier", DISPATCH_QUEUE_CONCURRENT);
         _urlOperations = [NSMutableDictionary new];
         _httpHeaders = [@{@"Accept": @"image/*;q=0.8"} mutableCopy];
-        configuration.timeoutIntervalForRequest = 15;
+        _downloadTimeout = 15;
+        configuration.timeoutIntervalForRequest = _downloadTimeout;
         _session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
         _executionOrder = XBWebImageDownloaderExecutionOrderFIFO;
     }
@@ -88,7 +89,7 @@
 
             //设置completionBlock，operation完成，移除urlOperations数组中对应的operation。注意，通过kvo，当finished时YES，operationQueue是自动移除对应的operation。这就是为什么自定义operation时，需要重写finished等属性。
             operation.completionBlock = ^{
-                XBWebImageDownloaderOperation *sOperation = wOperation;
+                __strong typeof(wOperation) sOperation = wOperation;
                 if (!sOperation) { return ;}
                 if (self.urlOperations[url] == sOperation) {
                     [self.urlOperations removeObjectForKey:url];
@@ -120,7 +121,7 @@
     return token;
 }
 
-- (void)cancle:(XBWebImageDownloaderToken *)token {
+- (void)cancel:(XBWebImageDownloaderToken *)token {
     if (!token) {return;}
     dispatch_barrier_async(self.barrierQueue, ^{
         XBWebImageDownloaderOperation *operation = self.urlOperations[token.url];
@@ -130,7 +131,7 @@
     });
 }
 
-- (void)cancleAllOperations {
+- (void)cancelAllOperations {
     [self.downloadQueue cancelAllOperations];
 }
 
