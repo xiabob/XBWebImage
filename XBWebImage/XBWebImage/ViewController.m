@@ -150,9 +150,7 @@
         
         self.layerView = [[UIView alloc] init];
         self.layerView.layer.contentsGravity = kCAGravityResizeAspect;
-        self.layerView.layer.masksToBounds = YES;
-        self.layerView.layer.contentsScale = [UIScreen mainScreen].scale;
-        self.layerView.layer.shouldRasterize = YES;
+//        self.layerView.layer.masksToBounds = YES;
         self.layerView.backgroundColor = [UIColor whiteColor];
         [self addSubview:self.layerView];
         
@@ -167,15 +165,16 @@
 }
 
 - (void)refreshWithUrl:(NSString *)url {
-    self.fullImageView.frame = self.bounds;
-    [self.fullImageView xb_setImageWithURL:url completed:^(UIImage *image, XBWebImageCacheType imageCache, NSError *error, NSURL *imageUrl) {
-        self.tagLabel.text = imageUrl.absoluteString;
-    }];
-    
-//    self.layerView.frame = self.bounds;
-//    [self.layerView.layer xb_setImageWithURL:url completed:^(UIImage *image, XBWebImageCacheType imageCache, NSError *error, NSURL *imageUrl) {
+//    self.fullImageView.frame = self.bounds;
+//    [self.fullImageView xb_setImageWithURL:url completed:^(UIImage *image, XBWebImageCacheType imageCache, NSError *error, NSURL *imageUrl) {
 //        self.tagLabel.text = imageUrl.absoluteString;
 //    }];
+    
+    self.layerView.frame = self.bounds;
+    [self.layerView.layer xb_setImageWithURL:url completed:^(UIImage *image, XBWebImageCacheType imageCache, NSError *error, NSURL *imageUrl) {
+        self.tagLabel.text = imageUrl.absoluteString;
+    }];
+
 }
 
 @end

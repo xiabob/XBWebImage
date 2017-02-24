@@ -101,7 +101,7 @@
                 __strong typeof(wself) sself = wself;
                 if (!sself || !soperation) {return ;}
                 
-                //here not main thread
+                //main thread
                 if (image && finished) {
                     [sself.imageCache saveImage:image imageData:data toDisk:YES forKey:url];
                 }
