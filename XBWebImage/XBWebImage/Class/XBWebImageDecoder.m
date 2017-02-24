@@ -10,6 +10,17 @@
 
 @implementation XBWebImageDecoder
 
+- (CGColorSpaceRef)deviceRGB {
+    static CGColorSpaceRef rgb;
+    static dispatch_once_t token;
+    dispatch_once(&token, ^{
+        //You are responsible for releasing this object by calling CGColorSpaceRelease.
+        //这里直接使用单例的方式
+        rgb = CGColorSpaceCreateDeviceRGB();
+    });
+    return rgb;
+}
+
 - (UIImage *)decodeImage:(UIImage *)image {
     if (!image) {return nil;}
     
@@ -29,13 +40,15 @@
     //for premultiplied ARGB or XRGB
     bitmapInfo |= hasAlphaInfo ? kCGImageAlphaPremultipliedFirst : kCGImageAlphaNoneSkipFirst;
     
-    CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 0, CGColorSpaceCreateDeviceRGB(), bitmapInfo);
+    CGContextRef context = CGBitmapContextCreate(NULL, width, height, 8, 0, [self deviceRGB], bitmapInfo);
     if (!context) {return image;}
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef); //decode
     CGImageRef newImageRef = CGBitmapContextCreateImage(context);
+    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
+    CFRelease(newImageRef);
     CFRelease(context);
     
-    return [UIImage imageWithCGImage:newImageRef];
+    return newImage;
 }
 
 @end
