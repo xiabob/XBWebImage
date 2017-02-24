@@ -26,6 +26,8 @@ typedef void(^XBWebImageInternalCompletedBlock)(UIImage *image, NSData *data, XB
 
 @interface XBWebImageManager : NSObject
 
+/** 是否提前将图片解码，默认是YES */
+@property (nonatomic, assign) BOOL shouldDecodeImage;
 
 
 + (instancetype)sharedManager;

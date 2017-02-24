@@ -8,6 +8,7 @@
 
 #import "XBWebImageManager.h"
 #import "XBWebImageDownloader.h"
+#import "XBWebImageDecoder.h"
 
 @interface XBWebImageContainerOperation : NSOperation
 
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) XBWebImageDownloader *imageDownloader;
 @property (nonatomic, strong) NSMutableArray *operationContainers;
 @property (nonatomic, strong) dispatch_queue_t loadQueue;
+@property (nonatomic, strong) XBWebImageDecoder *decoder;
 
 @end
 
@@ -42,9 +44,17 @@
         self.imageDownloader = [XBWebImageDownloader sharedDownloader];
         self.operationContainers = [NSMutableArray new];
         self.loadQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+        self.shouldDecodeImage = YES;
+        self.imageCache.shouldDecodeImage = self.shouldDecodeImage;
+        self.decoder = [XBWebImageDecoder new];
     }
     
     return self;
+}
+
+- (void)setShouldDecodeImage:(BOOL)shouldDecodeImage {
+    _shouldDecodeImage = shouldDecodeImage;
+    self.imageCache.shouldDecodeImage = shouldDecodeImage;
 }
 
 - (void)safelyRemoveOperation:(XBWebImageContainerOperation *)operation {
@@ -101,7 +111,11 @@
                 __strong typeof(wself) sself = wself;
                 if (!sself || !soperation) {return ;}
                 
-                //main thread
+                if (sself.shouldDecodeImage) {
+                    image = [sself.decoder decodeImage:image];
+                }
+                
+                //not main thread
                 if (image && finished) {
                     [sself.imageCache saveImage:image imageData:data toDisk:YES forKey:url];
                 }

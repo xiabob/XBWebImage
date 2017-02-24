@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		740B31001E601170008832F2 /* XBWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 740B30FF1E601170008832F2 /* XBWebImageDecoder.m */; };
 		744A9EDB1E5D6D47001A21A0 /* XBWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 744A9EDA1E5D6D47001A21A0 /* XBWebImageManager.m */; };
 		744A9EDE1E5D7062001A21A0 /* XBWebImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 744A9EDD1E5D7062001A21A0 /* XBWebImageCache.m */; };
 		744A9EE21E5D923E001A21A0 /* UIView+XBWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 744A9EE11E5D923E001A21A0 /* UIView+XBWebImage.m */; };
@@ -24,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		740B30FE1E601170008832F2 /* XBWebImageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBWebImageDecoder.h; sourceTree = "<group>"; };
+		740B30FF1E601170008832F2 /* XBWebImageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBWebImageDecoder.m; sourceTree = "<group>"; };
 		744A9ED91E5D6D47001A21A0 /* XBWebImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBWebImageManager.h; sourceTree = "<group>"; };
 		744A9EDA1E5D6D47001A21A0 /* XBWebImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBWebImageManager.m; sourceTree = "<group>"; };
 		744A9EDC1E5D7062001A21A0 /* XBWebImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBWebImageCache.h; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 				744A9EDA1E5D6D47001A21A0 /* XBWebImageManager.m */,
 				744A9EDC1E5D7062001A21A0 /* XBWebImageCache.h */,
 				744A9EDD1E5D7062001A21A0 /* XBWebImageCache.m */,
+				740B30FE1E601170008832F2 /* XBWebImageDecoder.h */,
+				740B30FF1E601170008832F2 /* XBWebImageDecoder.m */,
 				745408F71E5E9E3200B5E33C /* XBWebImage.h */,
 			);
 			path = Class;
@@ -211,6 +216,7 @@
 				745408F61E5E914D00B5E33C /* UIButton+XBWebImage.m in Sources */,
 				74817D491E5BE015008A7C67 /* ViewController.m in Sources */,
 				74817D5E1E5BF175008A7C67 /* XBWebImageDownloader.m in Sources */,
+				740B31001E601170008832F2 /* XBWebImageDecoder.m in Sources */,
 				744A9EDB1E5D6D47001A21A0 /* XBWebImageManager.m in Sources */,
 				745408F31E5E8DA700B5E33C /* UIImageView+XBWebImage.m in Sources */,
 				74817D5B1E5BE1A2008A7C67 /* XBWebImageDownloaderOperation.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "XBWebImageCache.h"
+#import "XBWebImageDecoder.h"
 #import <CommonCrypto/CommonDigest.h>
 
 @interface XBWebImageCache()
@@ -14,6 +15,7 @@
 @property (nonatomic, strong) NSLock *lock;
 @property (nonatomic, strong) NSCache *memoryCache;
 @property (nonatomic, strong) dispatch_queue_t ioQueue;
+@property (nonatomic, strong) XBWebImageDecoder *decoder;
 
 @end
 
@@ -35,6 +37,7 @@
         _memoryCache.totalCostLimit = 1024*1024*50;
         _memoryCache.countLimit = 100;
         _ioQueue = dispatch_queue_create("com.xiabob.XBWebImageCache.io", DISPATCH_QUEUE_CONCURRENT);
+        _decoder = [XBWebImageDecoder new];
         
         [self addNotification];
     }
@@ -98,6 +101,9 @@
     [self.lock lock];
     NSData *imageData = [NSData dataWithContentsOfFile:[self cachedPathForKey:key]];
     UIImage *image = [UIImage imageWithData:imageData];
+    if (self.shouldDecodeImage) {
+        image = [self.decoder decodeImage:image];
+    }
     [self saveImgaeToMemory:image forKey:key];
     [self.lock unlock];
     

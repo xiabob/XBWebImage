@@ -31,7 +31,8 @@ typedef void(^XBClearCacheCompletedBlock)();
 /** limits are imprecise/not strict */
 @property (nonatomic, assign) NSUInteger countLimit;
 
-
+/** 是否提前将图片解码，默认是YES */
+@property (nonatomic, assign) BOOL shouldDecodeImage;
 
 + (instancetype)sharedCache;
 
