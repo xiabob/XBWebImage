@@ -283,9 +283,9 @@ didCompleteWithError:(nullable NSError *)error {
         } else {
             [self callCompletedBlockWithImage:image data:self.imageData error:error andFinished:YES];
         }
-        
-        [self done];
     }
+    
+    [self done];
 }
 
 

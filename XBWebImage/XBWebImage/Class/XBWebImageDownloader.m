@@ -71,6 +71,18 @@
     _downloadTimeout = downloadTimeout <= 0 ? 15 : downloadTimeout;
 }
 
+- (XBWebImageDownloaderOperation *)operationForTask:(NSURLSessionTask *)task {
+    XBWebImageDownloaderOperation *target;
+    for (XBWebImageDownloaderOperation *operation in self.urlOperations.allValues) {
+        if (operation.dataTask.taskIdentifier == task.taskIdentifier) {
+            target = operation;
+            break;
+        }
+    }
+    
+    return target;
+}
+
 - (XBWebImageDownloaderToken *)downloadImageWithUrl:(NSURL *)url
                                             options:(XBWebImageDownloaderOptions)options
                                            progress:(XBWebImageDownloaderProgressBlock)progressBlock
@@ -141,14 +153,14 @@
           dataTask:(NSURLSessionDataTask *)dataTask
 didReceiveResponse:(NSURLResponse *)response
  completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler {
-    XBWebImageDownloaderOperation *operation = self.urlOperations[dataTask.response.URL];
+    XBWebImageDownloaderOperation *operation = [self operationForTask:dataTask];
     [operation URLSession:session dataTask:dataTask didReceiveResponse:response completionHandler:completionHandler];
 }
 
 - (void)URLSession:(NSURLSession *)session
           dataTask:(NSURLSessionDataTask *)dataTask
     didReceiveData:(NSData *)data {
-    XBWebImageDownloaderOperation *operation = self.urlOperations[dataTask.response.URL];
+    XBWebImageDownloaderOperation *operation = [self operationForTask:dataTask];
     [operation URLSession:session dataTask:dataTask didReceiveData:data];
 }
 
@@ -157,16 +169,22 @@ didReceiveResponse:(NSURLResponse *)response
           dataTask:(NSURLSessionDataTask *)dataTask
  willCacheResponse:(NSCachedURLResponse *)proposedResponse
  completionHandler:(void (^)(NSCachedURLResponse * _Nullable cachedResponse))completionHandler {
-    XBWebImageDownloaderOperation *operation = self.urlOperations[dataTask.response.URL];
+    XBWebImageDownloaderOperation *operation = [self operationForTask:dataTask];
     [operation URLSession:session dataTask:dataTask willCacheResponse:proposedResponse completionHandler:completionHandler];
 }
 
 #pragma mark - NSURLSessionTaskDelegate
 
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURLRequest * _Nullable))completionHandler {
+    if (completionHandler) {
+        completionHandler(request);
+    }
+}
+
 - (void)URLSession:(NSURLSession *)session
               task:(NSURLSessionTask *)task
 didCompleteWithError:(nullable NSError *)error {
-    XBWebImageDownloaderOperation *operation = self.urlOperations[task.response.URL];
+    XBWebImageDownloaderOperation *operation = [self operationForTask:task];
     [operation URLSession:session task:task didCompleteWithError:error];
 }
 

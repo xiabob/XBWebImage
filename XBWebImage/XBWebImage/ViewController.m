@@ -34,13 +34,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-//    _imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-//    _imageView.contentMode = UIViewContentModeScaleAspectFit;
-//    _imageView.clipsToBounds = YES;
-//    [self.view addSubview:_imageView];
-//    
-//    _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 30, 320, 10)];
-//    [self.view addSubview:_progressView];
+    _imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    _imageView.contentMode = UIViewContentModeScaleAspectFit;
+    _imageView.clipsToBounds = YES;
+    [self.view addSubview:_imageView];
+    
+    _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, 30, 320, 10)];
+    [self.view addSubview:_progressView];
     
     _images = @[@"http://animetaste.net/wp-content/uploads/2013/06/%E5%A4%A7%E5%9B%BE.jpg", @"http://img02.tooopen.com/images/20160408/tooopen_sy_158723161481.jpg", @"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg"];
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
